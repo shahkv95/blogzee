@@ -1,5 +1,6 @@
 import socket
 import time
+from config import HOST, PORT
 
 
 def new_connection(host: str, port: int) -> None:
@@ -24,7 +25,7 @@ def new_connection(host: str, port: int) -> None:
 
 
 if __name__ == '__main__':
-    host = '127.0.0.1'
-    port = 8080
+    host = HOST
+    port = PORT
 
     new_connection(host, port)

@@ -1,7 +1,8 @@
 import socket
+from config import HOST, PORT
 
-host = '127.0.0.1'  # local IP address
-port = 8080  # port to listen on
+host = HOST
+port = PORT
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((host, port))
