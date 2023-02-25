@@ -14,13 +14,14 @@ while True:
     client_socket, addr = server_socket.accept()
     print(f'Client connected from {addr}')
 
-    data = client_socket.recv(1024)
-    if not data:
-        break
+    while True:
+        data = client_socket.recv(1024)
+        if not data:
+            break
 
-    print(f'Received data: {data.decode()}')
-    response = f'Processed data: {data.decode()}'.encode()
-    client_socket.sendall(response)
+        print(f'Received data: {data.decode()}')
+        response = f'Processed data: {data.decode()}'.encode()
+        client_socket.sendall(response)
 
     client_socket.close()
 
