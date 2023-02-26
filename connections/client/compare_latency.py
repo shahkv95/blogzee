@@ -29,6 +29,6 @@ def compare_latency(func1: Callable, func2: Callable, num_runs: int = 10) -> Non
         func2_latency.append((end_time - start_time))
 
     # Print the results
-    print(f'{"Function":<30} {"Latency":<15}')
+    print(f'{"Connection Type":<30} {"Latency":<15}')
     print(f'{f"{func1.__name__}":<30} {f"{sum(func1_latency)/len(func1_latency):.5f}":<15}')
     print(f'{f"{func2.__name__}":<30} {f"{sum(func2_latency)/len(func2_latency):.5f}":<15}')
