@@ -22,7 +22,7 @@ Depending on the type of connection, o.e. either long-lived or new connections, 
 2. Activate the virtual environment
 
    ```bash
-   pipenv shell
+   PIPENV_VENV_IN_PROJECT=true pipenv shell
    ```
 
    You can also use any of the other virtual environment
