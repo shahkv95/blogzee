@@ -58,7 +58,7 @@ The server and client can be configured by editing the config.py file.
 - HOST: The hostname or IP address of the server. Default is '127.0.0.1'.
 - PORT: The port number on which the server listens. Default is 12345.
 - BUFFER_SIZE: The size of the buffer used to receive data from the server. Default is 1024.
-- NUM_RUNS = 20: The number of times a function should be run in order to calculate the average latency between the two functions.
+- NUM_RUNS: The number of times a function should be run in order to calculate the average latency between the two functions.
 
 ## License
 
