@@ -1,4 +1,5 @@
 import re
+from config import CONSISTENCY_FILE, PHONE_FORMAT
 import pandas as pd
 from faker import Faker
 import logging
@@ -16,7 +17,7 @@ class DataGenerator:
         self.fake = Faker(locale=locale)
         self.data = pd.DataFrame(columns=["email", "phone"])
 
-    def generate_data(self, rows: int):
+    def generate_data(self, rows: int = 10):
         try:
             for _ in range(rows):
                 email = self.fake.email()
@@ -42,7 +43,7 @@ class DataGenerator:
         except Exception as e:
             logging.error(f"Error loading data from {filename}: {e}")
 
-    def check_phone_format(self, format: str):
+    def check_phone_format(self, format: str = "^\d{11}$"):
         try:
             self.data["phone_format_valid"] = self.data["phone"].apply(
                 lambda x: bool(re.match(format, x))
@@ -55,7 +56,8 @@ class DataGenerator:
 if __name__ == "__main__":
     generator = DataGenerator(locale="hi_IN")
     generator.generate_data(rows=5)
-    generator.save_data("consistent_customer_data.csv")
-    generator.load_data("consistent_customer_data.csv")
-    generator.check_phone_format("^\d{11}$")
+    filename, phone_format = CONSISTENCY_FILE, PHONE_FORMAT
+    generator.save_data(filename)
+    generator.load_data(filename)
+    generator.check_phone_format(phone_format)
     print(generator.data)
