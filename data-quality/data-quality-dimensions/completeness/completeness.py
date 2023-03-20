@@ -25,7 +25,8 @@ class CustomerData:
                 logging.error(
                     f"The following column is missing from the data: {column}\n"
                 )
-            raise ValueError(f"Missing columns: {', '.join(missing_columns)}\n")
+            raise ValueError(
+                f"Missing columns: {', '.join(missing_columns)}\n")
         else:
             logging.info("All required columns are present in the data.\n")
 
