@@ -1,1 +1,7 @@
 2023-03-26 13:27:45,903:ERROR:An error occurred while checking unique data: [Errno 2] No such file or directory: 'check_unique_data.csv'
+2023-03-26 13:30:03,138:WARNING:Duplicate student IDs found
+2023-03-26 13:30:03,138:ERROR:An error occurred while checking unique data: 'name'
+2023-03-26 13:30:31,522:WARNING:Duplicate student IDs found
+2023-03-26 13:30:31,523:INFO:No duplicate names found
+2023-03-26 13:31:19,151:WARNING:Duplicate student IDs found
+2023-03-26 13:31:19,151:WARNING:Duplicate names found
