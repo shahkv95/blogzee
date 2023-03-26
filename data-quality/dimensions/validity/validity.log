@@ -1,0 +1,48 @@
+2023-03-26 13:56:02,563 WARNING Invalid employee data: Aditya, -1, error: 1 validation error for Employee
+age
+  Age cannot be less than 0 (type=value_error)
+2023-03-26 13:56:02,563 INFO Valid Employees: [Employee(name='Anjali', age=23), Employee(name='Priya', age=30), Employee(name='Rahul', age=45), Employee(name='Sneha', age=50), Employee(name='Arjun', age=27)]
+2023-03-26 13:56:02,563 INFO Invalid Employees: ['Aditya, -1']
+2023-03-26 13:56:34,160 WARNING Invalid employee data: Aditya, -1, error: 1 validation error for Employee
+age
+  Age cannot be less than 0 (type=value_error)
+2023-03-26 13:56:34,160 INFO Valid Employees: [Employee(name='Anjali', age=23), Employee(name='Priya', age=30), Employee(name='Rahul', age=45), Employee(name='Sneha', age=50), Employee(name='Arjun', age=27)]
+2023-03-26 13:56:34,160 INFO Invalid Employees: ['Aditya, -1']
+2023-03-26 13:57:22,421 WARNING Invalid employee data: Aditya, -1, error: 1 validation error for Employee
+age
+  Age cannot be less than 0 (type=value_error)
+2023-03-26 13:57:22,421 INFO Valid Employees: [Employee(name='Anjali', age=23), Employee(name='Priya', age=30), Employee(name='Rahul', age=45), Employee(name='Sneha', age=1000), Employee(name='Arjun', age=27)]
+2023-03-26 13:57:22,421 INFO Invalid Employees: ['Aditya, -1']
+2023-03-26 13:57:31,001 WARNING Invalid employee data: Aditya, -1, error: 1 validation error for Employee
+age
+  Age cannot be less than 0 (type=value_error)
+2023-03-26 13:57:31,001 WARNING Invalid employee data: Sneha, 1.4, error: invalid literal for int() with base 10: ' 1.4'
+2023-03-26 13:57:31,001 INFO Valid Employees: [Employee(name='Anjali', age=23), Employee(name='Priya', age=30), Employee(name='Rahul', age=45), Employee(name='Arjun', age=27)]
+2023-03-26 13:57:31,001 INFO Invalid Employees: ['Aditya, -1', 'Sneha, 1.4']
+2023-03-26 13:57:58,784 WARNING Invalid employee data: Aditya, -1, error: 1 validation error for Employee
+age
+  Age cannot be less than 0 (type=value_error)
+2023-03-26 13:57:58,784 WARNING Invalid employee data: Sneha, 1.4, error: invalid literal for int() with base 10: ' 1.4'
+2023-03-26 13:57:58,784 INFO Valid Employees: [Employee(name='Anjali', age=23.0), Employee(name='Priya', age=30.0), Employee(name='Rahul', age=45.0), Employee(name='Arjun', age=27.0)]
+2023-03-26 13:57:58,784 INFO Invalid Employees: ['Aditya, -1', 'Sneha, 1.4']
+2023-03-26 13:58:09,632 WARNING Invalid employee data: Aditya, -1, error: 1 validation error for Employee
+age
+  Age cannot be less than 0 (type=value_error)
+2023-03-26 13:58:09,632 WARNING Invalid employee data: Sneha, 1.4, error: invalid literal for int() with base 10: ' 1.4'
+2023-03-26 13:58:09,632 INFO Valid Employees: [Employee(name='Anjali', age=23.0), Employee(name='Priya', age=30.0), Employee(name='Rahul', age=45.0), Employee(name='Arjun', age=27.0)]
+2023-03-26 13:58:09,632 INFO Invalid Employees: ['Aditya, -1', 'Sneha, 1.4']
+2023-03-26 13:58:41,539 WARNING Invalid employee data: Aditya, -1, error: 1 validation error for Employee
+age
+  Age cannot be less than 0 (type=value_error)
+2023-03-26 13:58:41,540 WARNING Invalid employee data: Sneha, 1.4, error: invalid literal for int() with base 10: ' 1.4'
+2023-03-26 13:58:41,540 INFO Valid Employees: [Employee(name='Anjali', age=23), Employee(name='Priya', age=30), Employee(name='Rahul', age=45), Employee(name='Arjun', age=27)]
+2023-03-26 13:58:41,540 INFO Invalid Employees: ['Aditya, -1', 'Sneha, 1.4']
+2023-03-26 13:58:55,823 WARNING Invalid employee data: Aditya, -1, error: 1 validation error for Employee
+age
+  Age cannot be less than 0 (type=value_error)
+2023-03-26 13:58:55,823 WARNING Invalid employee data: Rahul, 450, error: 1 validation error for Employee
+age
+  Age cannot be greater than 200 (type=value_error)
+2023-03-26 13:58:55,823 WARNING Invalid employee data: Sneha, 1.4, error: invalid literal for int() with base 10: ' 1.4'
+2023-03-26 13:58:55,823 INFO Valid Employees: [Employee(name='Anjali', age=23), Employee(name='Priya', age=30), Employee(name='Arjun', age=27)]
+2023-03-26 13:58:55,823 INFO Invalid Employees: ['Aditya, -1', 'Rahul, 450', 'Sneha, 1.4']
