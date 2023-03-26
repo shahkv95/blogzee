@@ -1,4 +1,5 @@
 import logging
+from config import START_DATE, END_DATE, DATA_FILE_NAME
 import pandas as pd
 from datetime import datetime, timedelta
 
@@ -42,13 +43,12 @@ if __name__ == "__main__":
         }
     )
 
-    customer_data.to_csv("relevant_customer_data.csv", index=False)
+    customer_data.to_csv(DATA_FILE_NAME, index=False)
 
-    data = pd.read_csv("relevant_customer_data.csv")
+    data = pd.read_csv(DATA_FILE_NAME)
 
-    start_date = "2023-01-01"
-    end_date = "2023-03-25"
-
+    start_date = START_DATE
+    end_date = END_DATE
     relevant_data = RelevantData(data, "date_column")
     filtered_data = relevant_data.filter_by_date_range(start_date, end_date)
 
