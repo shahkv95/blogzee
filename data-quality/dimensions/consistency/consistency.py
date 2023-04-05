@@ -1,63 +1,41 @@
-import re
-from config import CONSISTENCY_FILE, PHONE_FORMAT
+from config import DATA_SOURCE
 import pandas as pd
-from faker import Faker
 import logging
+from typing import Union
 
-logging.basicConfig(
-    filename="app.log",
-    filemode="w",
-    format="%(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO,
-)
+logging.basicConfig(level=logging.INFO)
 
 
-class DataGenerator:
-    def __init__(self, locale: str):
-        self.fake = Faker(locale=locale)
-        self.data = pd.DataFrame(columns=["email", "phone"])
+class PhoneNumberStandardizer:
+    def __init__(self, phone: Union[str, int]) -> None:
+        self.phone = phone
 
-    def generate_data(self, rows: int = 10):
+    def standardize_phone_number(self) -> Union[str, None]:
         try:
-            for _ in range(rows):
-                email = self.fake.email()
-                phone = self.fake.phone_number()
-                self.data = self.data.append(
-                    {"email": email, "phone": phone}, ignore_index=True
-                )
-            logging.info(f"{rows} rows of sample data generated.")
-        except Exception as e:
-            logging.error(f"Error generating data: {e}")
+            phone = self.phone
+            phone = "".join(filter(str.isdigit, phone))
 
-    def save_data(self, filename: str):
-        try:
-            self.data.to_csv(filename, index=False)
-            logging.info(f"Sample data saved to {filename}.")
-        except Exception as e:
-            logging.error(f"Error saving data to {filename}: {e}")
+            if len(phone) == 10:
+                return phone[:3] + "-" + phone[3:6] + "-" + phone[6:]
 
-    def load_data(self, filename: str):
-        try:
-            self.data = pd.read_csv(filename)
-            logging.info(f"Data loaded from {filename}.")
+            elif len(phone) == 12 and phone[0:2] == "91":
+                return phone[2:5] + "-" + phone[5:8] + "-" + phone[8:]
+            else:
+                return "INVALID"
         except Exception as e:
-            logging.error(f"Error loading data from {filename}: {e}")
-
-    def check_phone_format(self, format: str = "^\d{11}$"):
-        try:
-            self.data["phone_format_valid"] = self.data["phone"].apply(
-                lambda x: bool(re.match(format, x))
-            )
-            logging.info("Phone format checked.")
-        except Exception as e:
-            logging.error(f"Error checking phone format: {e}")
+            logging.error(f"Error occurred while standardizing phone number: {e}")
+            return None
 
 
 if __name__ == "__main__":
-    generator = DataGenerator(locale="hi_IN")
-    generator.generate_data(rows=5)
-    filename, phone_format = CONSISTENCY_FILE, PHONE_FORMAT
-    generator.save_data(filename)
-    generator.load_data(filename)
-    generator.check_phone_format(phone_format)
-    print(generator.data)
+    try:
+        logging.info(" Phone numbers are considered to be Indian number format.\n")
+        filename = DATA_SOURCE
+
+        df = pd.read_csv(filename)
+        df["consistent_format"] = df["phone_number"].apply(
+            lambda x: PhoneNumberStandardizer(x).standardize_phone_number()
+        )
+        print(df)
+    except FileNotFoundError:
+        logging.error("File not found.")
