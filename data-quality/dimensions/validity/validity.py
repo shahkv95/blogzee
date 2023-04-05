@@ -51,10 +51,10 @@ class ChecksumValidator:
                 logging.info(" Data migration failed. Checksum values do not match.")
 
         except FileNotFoundError as fnfe:
-            logging.error(" Error occurred while validating data migration:", fnfe)
+            logging.error(" Error occurred while validating data file path:", fnfe)
 
         except Exception as ex:
-            logging.error(" Error occurred while validating data migration: ", ex)
+            logging.error(" Error occurred while validating data migration checksum: ", ex)
 
 
 if __name__ == "__main__":
