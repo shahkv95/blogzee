@@ -10,7 +10,7 @@ class PhoneNumberStandardizer:
     def __init__(self, phone: Union[str, int]) -> None:
         self.phone = phone
 
-    def standardize_phone_number(self) -> Union[str, None]:
+    def standardize_phone_number_format(self) -> Union[str, None]:
         try:
             phone = self.phone
             phone = "".join(filter(str.isdigit, phone))
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
         df = pd.read_csv(filename)
         df["consistent_format"] = df["phone_number"].apply(
-            lambda x: PhoneNumberStandardizer(x).standardize_phone_number()
+            lambda x: PhoneNumberStandardizer(x).standardize_phone_number_format()
         )
         print(df)
     except FileNotFoundError:
