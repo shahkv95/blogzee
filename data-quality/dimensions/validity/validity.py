@@ -1,41 +1,62 @@
 import logging
-from typing import List
-from pydantic import BaseModel, validator
+import hashlib
+from config import SOURCE_FILE_PATH, MIGRATED_FILE_PATH
+
+logging.basicConfig(level=logging.INFO)
 
 
-class Employee(BaseModel):
-    name: str
-    age: int
+class ChecksumValidator:
+    def __init__(self, source_file_path: str, migrated_file_path: str) -> None:
+        self.source_file_path = source_file_path
 
-    @validator("age")
-    def age_validator(cls, value):
-        if value < 0:
-            raise ValueError("Age cannot be less than 0")
-        elif value > 200:
-            raise ValueError("Age cannot be greater than 200")
-        return value
+        self.migrated_file_path = migrated_file_path
+
+    def _calculate_checksum(self, data: bytes) -> str:
+        """
+        Calculate the SHA-256 checksum for a given set of data.
+        """
+        sha256 = hashlib.sha256()
+
+        sha256.update(data)
+
+        return sha256.hexdigest()
+
+    def _read_file(self, file_path: str) -> bytes:
+        with open(file_path, "rb") as file:
+            data = file.read()
+
+        return data
+
+    def validate(self) -> None:
+        """
+        Validate the data migration process by comparing the checksum values
+        of the source and migrated data files.
+        """
+        try:
+
+            logging.info("   Source file path: %s", self.source_file_path)
+            logging.info(" Migrated file path: %s", self.migrated_file_path)
+
+            source_data = self._read_file(self.source_file_path)
+            source_checksum = self._calculate_checksum(source_data)
+            logging.info("    Source checksum: %s", source_checksum)
+
+            migrated_data = self._read_file(self.migrated_file_path)
+            migrated_checksum = self._calculate_checksum(migrated_data)
+            logging.info("  Migrated checksum: %s", migrated_checksum)
+
+            if source_checksum == migrated_checksum:
+                logging.info(" Data migration successful. Checksum values match.")
+            else:
+                logging.info(" Data migration failed. Checksum values do not match.")
+
+        except FileNotFoundError as ex:
+            logging.error(" Error occurred while validating data migration:", ex)
+
+        except Exception as ex:
+            logging.error(" Error occurred while validating data migration: ", ex)
 
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(message)s",
-        handlers=[logging.FileHandler("validity.log"), logging.StreamHandler()],
-    )
-
-    with open("check_validity_data.csv", "r") as f:
-        employee_data = f.readlines()
-
-    valid_employees = []
-    invalid_employees = []
-    for line in employee_data:
-        try:
-            name, age = line.strip().split(",")
-            employee = Employee(name=name, age=int(age))
-            valid_employees.append(employee)
-        except ValueError as e:
-            logging.warning(f"Invalid employee data: {line.strip()}, error: {e}")
-            invalid_employees.append(line.strip())
-
-    logging.info(f"Valid Employees: {valid_employees}")
-    logging.info(f"Invalid Employees: {invalid_employees}")
+    validator = ChecksumValidator(SOURCE_FILE_PATH, MIGRATED_FILE_PATH)
+    validator.validate()
